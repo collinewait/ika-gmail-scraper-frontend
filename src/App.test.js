@@ -103,7 +103,7 @@ describe("App module", () => {
     const sampleToken = generateToken();
     Storage.prototype.getItem = jest.fn(() => sampleToken);
     jest.spyOn(window, "fetch").mockImplementationOnce(() => {
-      const response = { blob: jest.fn() };
+      const response = { blob: jest.fn(), status: 200 };
       return Promise.resolve(response);
     });
     global.URL.createObjectURL = jest.fn(() => "details");
@@ -169,7 +169,7 @@ describe("App module", () => {
     Storage.prototype.getItem = jest.fn(() => access_token);
     window.location.search = `?access_token=${access_token}`;
     jest.spyOn(window, "fetch").mockImplementationOnce(() => {
-      const response = { blob: jest.fn() };
+      const response = { blob: jest.fn(), status: 200 };
       return Promise.resolve(response);
     });
     global.URL.createObjectURL = jest.fn(() => "details");
@@ -179,6 +179,24 @@ describe("App module", () => {
 
     await wait(() => {
       expect(getByRole("alert")).toHaveTextContent(/download completed/i);
+    });
+  });
+
+  test("it should display an error when the request is not successful", async () => {
+    const access_token = generateToken();
+    Storage.prototype.getItem = jest.fn(() => access_token);
+    window.location.search = `?access_token=${access_token}`;
+    jest.spyOn(window, "fetch").mockImplementationOnce(() => {
+      const response = { error: "someErrorHere", status: 400 };
+      return Promise.resolve(response);
+    });
+    global.URL.createObjectURL = jest.fn(() => "details");
+    global.URL.revokeObjectURL = jest.fn();
+
+    const { getByRole } = setUp();
+
+    await wait(() => {
+      expect(getByRole("alert")).toHaveTextContent(/Something went wrong/i);
     });
   });
 });

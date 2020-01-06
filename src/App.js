@@ -20,8 +20,7 @@ const fetchAttachments = (authorization, setResolved, email, setError) => {
     })
     .then(resp => {
       if (resp.status !== 200) {
-        setError("Something went wrong, please try again");
-        setResolved(false);
+        throw new Error("Something went wrong, please try again");
       }
       return resp.blob();
     })
@@ -43,6 +42,10 @@ const fetchAttachments = (authorization, setResolved, email, setError) => {
       window.URL.revokeObjectURL(url);
       setError(null);
       setResolved(true);
+    })
+    .catch(err => {
+      setResolved(false);
+      setError(err.message);
     });
 };
 
