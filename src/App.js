@@ -9,7 +9,13 @@ const requestAccessToGmailAccount = () => {
   window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/google/login`;
 };
 
-const fetchAttachments = (authorization, setResolved, email, setError) => {
+const fetchAttachments = (
+  authorization,
+  setResolved,
+  email,
+  setError,
+  setLoading
+) => {
   const url = `${process.env.REACT_APP_API_BASE_URL}/download/attachment?emailThatSentAttach=${email}`;
   window
     .fetch(url, {
@@ -40,10 +46,12 @@ const fetchAttachments = (authorization, setResolved, email, setError) => {
 
       link.click();
       window.URL.revokeObjectURL(url);
+      setLoading(false);
       setError(null);
       setResolved(true);
     })
     .catch(err => {
+      setLoading(false);
       setResolved(false);
       setError(err.message);
     });
@@ -53,13 +61,16 @@ const getLoginToken = () => localStorage.getItem("login-token");
 const decodeJwtToken = jwtToken => jwtDecode(jwtToken);
 const getAuthorization = decodedToken => `Bearer ${decodedToken}`;
 
-const getAttachments = (email, setResolved, setError) => {
+const getAttachments = (email, setResolved, setError, setLoading) => {
   const loginToken = getLoginToken();
   if (loginToken) {
     const decodedToken = decodeJwtToken(loginToken);
     if (decodedToken.exp > Date.now() / 1000) {
       const bearer = getAuthorization(loginToken);
-      fetchAttachments(bearer, setResolved, email, setError);
+      setLoading(true);
+      setError(null);
+      setResolved(false);
+      fetchAttachments(bearer, setResolved, email, setError, setLoading);
     } else {
       localStorage.setItem("email", email);
       requestAccessToGmailAccount();
@@ -74,6 +85,7 @@ function App() {
   const [email, setEmail] = React.useState("");
   const [resolved, setResolved] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -84,7 +96,7 @@ function App() {
       window.history.replaceState(null, null, window.location.pathname);
       const emailInStorage = localStorage.getItem("email");
 
-      getAttachments(emailInStorage, setResolved, setError);
+      getAttachments(emailInStorage, setResolved, setError, setLoading);
 
       localStorage.removeItem("email");
     }
@@ -94,7 +106,7 @@ function App() {
     event.preventDefault();
     const isValidEmail = validateEmail(email);
     if (isValidEmail) {
-      getAttachments(email, setResolved, setError);
+      getAttachments(email, setResolved, setError, setLoading);
     } else {
       setResolved(false);
       setError("Invalid email address");
@@ -124,6 +136,11 @@ function App() {
       {resolved ? (
         <div role="alert" className="success-message">
           Download completed!
+        </div>
+      ) : null}
+      {loading ? (
+        <div role="alert" class="loader">
+          Downloading...
         </div>
       ) : null}
       <EmailForm

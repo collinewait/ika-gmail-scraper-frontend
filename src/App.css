@@ -17,6 +17,7 @@
   display: flex;
   justify-content: center;
   background-color: #fff;
+  margin-top: 5px;
 }
 
 .Form-drawingInput {
@@ -63,7 +64,9 @@
   text-align: center;
 }
 
-.success-message {
+.success-message, .loader {
   color: #1ce39b;
   text-align: center;
 }
+
+ 
