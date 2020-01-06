@@ -1,38 +1,69 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  text-align: left;
+  height: 100%;
+  display: block;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  padding: 0.3125rem;
+  padding-left: 1.25rem;
+  color: #1ce39b;
+  margin-bottom: 1.25rem;
+}
+
+.Form {
+  padding-top: 0.5rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #fff;
 }
 
-.App-link {
-  color: #61dafb;
+.Form-drawingInput {
+  border: 1px solid #ccc;
+  border-right: none;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1.25rem;
+  width: 15.625rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.Form-button {
+  font-size: 1.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.8125rem;
+  padding-bottom: 0.8125rem;
+  background-color: #282c34;
+  border: none;
+  color: #1ce39b;
+  cursor: pointer;
+}
+
+.simple-heading {
+  text-align: center;
+  padding-top: 3.125rem;
+}
+
+@media screen and (max-width: 445px) {
+  .Form-drawingInput {
+    border-right: 1px solid #ccc;
   }
-  to {
-    transform: rotate(360deg);
+
+  .Form-button {
+    display: block;
+    margin: 12px auto;
   }
+}
+
+.error-message {
+  color: #cc0000;
+  text-align: center;
+}
+
+.success-message {
+  color: #1ce39b;
+  text-align: center;
 }
