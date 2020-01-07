@@ -19,6 +19,7 @@ const fetchAttachments = (
   const url = `${process.env.REACT_APP_API_BASE_URL}/download/attachment?emailThatSentAttach=${email}`;
   window
     .fetch(url, {
+      method: "GET",
       headers: {
         Authorization: authorization
       },
@@ -53,6 +54,8 @@ const fetchAttachments = (
     .catch(err => {
       setLoading(false);
       setResolved(false);
+      localStorage.setItem("email", email);
+      localStorage.removeItem("login-token");
       setError(err.message);
     });
 };
