@@ -37,5 +37,13 @@
     "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
     "npm": "^6.13.4"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!/node_modules/",
+      "!src/index.js",
+      "!src/serviceWorker.js"
+    ]
   }
 }

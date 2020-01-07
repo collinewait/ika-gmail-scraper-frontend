@@ -142,7 +142,7 @@ function App() {
         </div>
       ) : null}
       {loading ? (
-        <div role="alert" class="loader">
+        <div role="alert" className="loader">
           Downloading...
         </div>
       ) : null}
