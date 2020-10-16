@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ika-gmail-scraper-frontend/static/css/main.e8611cb9.chunk.css",
+    "main.js": "/ika-gmail-scraper-frontend/static/js/main.f0974238.chunk.js",
+    "main.js.map": "/ika-gmail-scraper-frontend/static/js/main.f0974238.chunk.js.map",
+    "runtime-main.js": "/ika-gmail-scraper-frontend/static/js/runtime-main.bfb4fd1a.js",
+    "runtime-main.js.map": "/ika-gmail-scraper-frontend/static/js/runtime-main.bfb4fd1a.js.map",
+    "static/js/2.b132448e.chunk.js": "/ika-gmail-scraper-frontend/static/js/2.b132448e.chunk.js",
+    "static/js/2.b132448e.chunk.js.map": "/ika-gmail-scraper-frontend/static/js/2.b132448e.chunk.js.map",
+    "index.html": "/ika-gmail-scraper-frontend/index.html",
+    "precache-manifest.28b5cd594ab3c70647998a7dda2e49d4.js": "/ika-gmail-scraper-frontend/precache-manifest.28b5cd594ab3c70647998a7dda2e49d4.js",
+    "service-worker.js": "/ika-gmail-scraper-frontend/service-worker.js",
+    "static/css/main.e8611cb9.chunk.css.map": "/ika-gmail-scraper-frontend/static/css/main.e8611cb9.chunk.css.map",
+    "static/js/2.b132448e.chunk.js.LICENSE": "/ika-gmail-scraper-frontend/static/js/2.b132448e.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bfb4fd1a.js",
+    "static/js/2.b132448e.chunk.js",
+    "static/css/main.e8611cb9.chunk.css",
+    "static/js/main.f0974238.chunk.js"
+  ]
+}
